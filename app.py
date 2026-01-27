@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-# ---------- SIMPLE KNOWLEDGE BASE ----------
 KNOWLEDGE_BASE = [
     {
         "appliance": "Ceiling Fan",
@@ -26,13 +25,13 @@ KNOWLEDGE_BASE = [
     }
 ]
 
-# ---------- ENERGY CALCULATION MODEL ----------
+
 def compute_energy(appliances, residents):
     daily_kwh = 0
     breakdown = []
 
     for a in appliances:
-        # kWh per day for this appliance
+        
         a_kwh = a["count"] * a["watts"] * a["hours"] / 1000
         daily_kwh += a_kwh
         breakdown.append({
@@ -44,14 +43,14 @@ def compute_energy(appliances, residents):
     per_resident = monthly_kwh / residents if residents else None
     return monthly_kwh, per_resident, breakdown
 
-# ---------- RECOMMENDATION ENGINE ----------
+
 def generate_recommendations(breakdown, monthly_bill=None):
     total_daily = sum(b["daily_kwh"] for b in breakdown)
     recs = []
 
     for b in breakdown:
         share = b["daily_kwh"] / total_daily if total_daily else 0
-        # High usage if more than 30% of daily consumption
+      
         if share > 0.3:
             cond = "high_usage"
         else:
@@ -68,7 +67,7 @@ def generate_recommendations(breakdown, monthly_bill=None):
                 })
 
     total_saving_percent = sum(r["estimated_saving_percent"] for r in recs)
-    # Cap total saving to 25% to remain realistic
+ 
     total_saving_percent = min(total_saving_percent, 25)
 
     saving_money = None
@@ -77,7 +76,7 @@ def generate_recommendations(breakdown, monthly_bill=None):
 
     return recs, total_saving_percent, saving_money
 
-# ---------- BUILD TEXT RESPONSE ----------
+
 def build_response(context, monthly_kwh, per_resident, recs, total_saving_percent, saving_money):
     lines = []
 
@@ -112,7 +111,7 @@ def build_response(context, monthly_kwh, per_resident, recs, total_saving_percen
 
     return "\n".join(lines)
 
-# ---------- STREAMLIT UI ----------
+
 def main():
     st.title("AI Energy Saver Recommendation Assistant")
     st.write("For Hostels and Households")
@@ -156,7 +155,6 @@ def main():
     with col12:
         pass
 
-    # Build appliance list
     appliances = []
     if fan_count > 0:
         appliances.append({"name": "Ceiling Fan", "count": fan_count, "watts": fan_watts, "hours": fan_hours})
@@ -173,7 +171,7 @@ def main():
             monthly_kwh, per_resident, breakdown = compute_energy(appliances, residents)
             recs, total_saving_percent, saving_money = generate_recommendations(breakdown, monthly_bill)
 
-            # Show results
+          
             st.subheader("Energy Analysis")
             df = pd.DataFrame(breakdown)
             df["share_percent"] = (df["daily_kwh"] / df["daily_kwh"].sum()) * 100
@@ -185,3 +183,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
