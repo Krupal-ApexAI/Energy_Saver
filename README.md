@@ -78,7 +78,7 @@ Energy-Saver/
 ```bash
 git clone https://github.com/Krupal-ApexAI/Energy-Saver.git
 
-cd AI-Energy-Saver
+cd Energy-Saver
 
 python -m venv venv
 
