@@ -1,4 +1,4 @@
-# AI Energy Saver Recommendation System
+# Energy Saver Recommendation System
 
 A simple machine learning web app that predicts household electricity usage and helps estimate how appliance usage affects monthly energy cost.
 
@@ -65,7 +65,7 @@ This project is open for learning and personal use.
 
 ## Project Setup
 
-AI-Energy-Saver/
+Energy-Saver/
 │
 ├── app.py
 ├── train_model.py
@@ -76,7 +76,7 @@ AI-Energy-Saver/
 
 ### Clone the repository
 ```bash
-git clone https://github.com/Krupal-ApexAI/AI-Energy-Saver.git
+git clone https://github.com/Krupal-ApexAI/Energy-Saver.git
 
 cd AI-Energy-Saver
 
